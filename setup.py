@@ -13,7 +13,7 @@ setup(
     author='esunvoteb',                   # Type in your name
     author_email='esun@voteb.com',      # Type in your E-Mail
     # Provide either the link to your github or to your website
-    url='https://github.com/SyngularXR/DeepEye',
+    url='https://github.com/ImagineersHub/deepeye',
     # download_url='https://github.com/ImagineersHub/compipe/archive/v_01.tar.gz',    # I explain this later on
     keywords=['python', 'blender'],   # Keywords that define your package best
     packages=find_packages(),

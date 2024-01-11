@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='deepeye',       
+    name='deepeye',
     # Start with a small number and increase it with every change you make
-    version='0.1.0',
+    version='0.1.1',
     # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     license='MIT',
     # Give a short description about your library
@@ -18,9 +18,9 @@ setup(
     keywords=['python', 'blender'],   # Keywords that define your package best
     packages=find_packages(),
     install_requires=[            # I get to this in a second
-        "torch==2.0.0+cu117",
-        "torchaudio==2.0.1+cu117",
-        "torchvision==0.15.1+cu117",
+        "torch",
+        "torchaudio",
+        "torchvision",
         "numpy==1.24.2",
         "opencv-contrib-python==4.7.0.72"
     ],

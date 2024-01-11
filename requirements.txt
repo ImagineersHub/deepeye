@@ -4,3 +4,4 @@ twine
 wheel
 pytest
 pydantic
+colorlog

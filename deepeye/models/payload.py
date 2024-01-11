@@ -3,8 +3,15 @@ from enum import Enum, auto
 
 
 class ModelType(str, Enum):
-    BSRGan = auto()
-    RealESRGan = auto()
+    BSRGan = "BSRGan"
+    RealESRGan = "RealESRGan"
+
+    @staticmethod
+    def from_str(s):
+        try:
+            return ModelType[s]
+        except KeyError:
+            raise ValueError(f"{s} is not a valid ModelType")
 
 
 class Payload(BaseModel):

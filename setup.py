@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='deepeye',
     # Start with a small number and increase it with every change you make
-    version='0.1.7',
+    version='0.1.8',
     # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     license='MIT',
     # Give a short description about your library
@@ -23,7 +23,7 @@ setup(
         "torchvision",
         "numpy==1.24.2",
         "opencv-contrib-python==4.7.0.72",
-        "pydantic==2.5.3",
+        "pydantic",
         "colorlog",
         "matplotlib"
     ],

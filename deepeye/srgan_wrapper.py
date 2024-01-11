@@ -5,7 +5,7 @@ import os.path
 from dataclasses import dataclass
 import numpy as np
 import torch
-from .utils.Singleton import Singleton
+from .utils.singleton import Singleton
 from .utils.logging import logger
 from numpy import ndarray
 

@@ -59,19 +59,19 @@ class BaseSRGanWrapper(metaclass=Singleton):
         self.model.to(self.device)
         torch.cuda.empty_cache()
 
-    def predict(self, image: ndarray, max_interp: int, scale: float = 0.5):
+    def predict(self, image: ndarray, max_value: int, scale: float = 0.5):
 
         # reformat input image (single channel image) into 3-dimensions
         if (image_dim := image.ndim) == 2:
             image = np.stack((image,)*3, axis=-1)
 
-        image = uint2tensor4(image, max_interp)
+        image = uint2tensor4(image, max_value)
         image = image.to(self.device)
 
         with torch.no_grad():
             output_img = self.model(image)
 
-        output_img = tensor2uint(output_img, max_interp)
+        output_img = tensor2uint(output_img, max_value)
         output_img = imresize_np(output_img, scale/self.net_scale)
 
         return output_img[:, :, 0] if image_dim == 2 else output_img
@@ -87,15 +87,15 @@ class RealESRGan(BaseSRGanWrapper):
         super().__init__(model_path=model_path, net_scale=net_scale)
 
 
-def bsrgan_predict(source: str, output: str, model_path: str, scale: float = 1.):
-    image = imread_uint(source, n_channels=3)
-    output_img = BSRGan(model_path=model_path).predict(
-        image=image, scale=scale)
-    imsave(output_img, output or image)
+# def bsrgan_predict(source: str, output: str, model_path: str, max_value:int, scale: int = 2):
+#     image = imread_uint(source, n_channels=3)
+#     output_img = BSRGan(model_path=model_path).predict(
+#         image=image, max_value=max_value, scale=scale)
+#     imsave(output_img, output or image)
 
 
-def realesrgan_predict(source: str, output: str, model_path: str, scale: float = 1.):
-    image = imread_uint(source, n_channels=3)
-    output_img = RealESRGan(model_path=model_path).predict(
-        image=image, scale=scale)
-    imsave(output_img, output or image)
+# def realesrgan_predict(source: str, output: str, model_path: str, max_value:int, scale: int = 2):
+#     image = imread_uint(source, n_channels=3)
+#     output_img = RealESRGan(model_path=model_path).predict(
+#         image=image, max_value=max_value, scale=scale)
+#     imsave(output_img, output or image)

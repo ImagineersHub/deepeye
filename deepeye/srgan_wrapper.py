@@ -45,7 +45,8 @@ class BaseSRGanWrapper(metaclass=Singleton):
             raise FileNotFoundError(f'Not found model file: {model_path}')
 
         logger.debug(f'Loading model from {model_path}')
-        loadnet = torch.load(model_path, map_location=torch.device('cpu'))
+        loadnet = torch.load(
+            model_path, map_location=torch.device('cpu'), weights_only=True)
 
         if 'params_ema' in loadnet:
             self.model = esrgan_net(scale=self.net_scale)
@@ -72,7 +73,9 @@ class BaseSRGanWrapper(metaclass=Singleton):
             output_img = self.model(image)
 
         output_img = tensor2uint(output_img, max_value)
-        output_img = imresize_np(output_img, scale/self.net_scale)
+
+        if (scale := scale/self.net_scale) != 1:
+            output_img = imresize_np(output_img, scale=scale)
 
         return output_img[:, :, 0] if image_dim == 2 else output_img
 
